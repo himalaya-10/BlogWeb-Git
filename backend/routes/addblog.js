@@ -14,9 +14,13 @@ router.post('/addblog',async(req,res)=>{
     res.json(savedblog)
 })
 
-router.get('/getblog',async(req,res)=>{
-    const blog=await Blog.find()
+
+// router.get(`/getblog/:pageSize/:i`,async(req,res)=>{
+//     const blog=await Blog.find().skip(parseInt((req.params.i-1)*req.params.pageSize)).limit(parseInt(req.params.pageSize));
+//     res.json(blog)
+// })
+router.get(`/getblog/:pageSize/:pageNo`,async(req,res)=>{
+    const blog=await Blog.find().skip((req.params.pageNo-1)*req.params.pageSize).limit((req.params.pageSize))
     res.json(blog)
 })
-
 module.exports=router
